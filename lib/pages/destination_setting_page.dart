@@ -11,13 +11,13 @@ class DestinationSettingPage extends StatefulWidget {
 }
 
 class DestinationSettingPageState extends State<DestinationSettingPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("여행지 설정"),
         centerTitle: true,
-        // 나중에 IconButton 으로 변경 필요
         leading: SizedBox(
           width: 100,
           height: 50,
@@ -28,9 +28,9 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
             child: Container(
               alignment: Alignment.center,
               child: const Icon(
-                Icons.arrow_back_ios, // 뒤로 가기 아이콘
-                size: 30, // 아이콘 크기 설정
-                color: Colors.black, // 아이콘 색상 설정
+                Icons.arrow_back_ios,
+                size: 30,
+                color: Colors.black,
               ),
             ),
           ),
@@ -51,14 +51,18 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
                 alignment: Alignment.center,
                 child: Text(
                   "어디에서 새로운 미식을 즐기고 계신가요?\n 여행지를 선택하세요.",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 24, // 텍스트 크기
+                    fontSize: 20, // 텍스트 크기
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               const SizedBox(height: 30),
-              const Text("언어"),
+              const Text(
+                "언어",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 7),
               GestureDetector(
                 onTap: () {
@@ -87,7 +91,10 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text("화폐"),
+              const Text(
+                "화폐",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 7),
               GestureDetector(
                 onTap: () {
