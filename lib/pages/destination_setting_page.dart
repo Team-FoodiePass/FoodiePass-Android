@@ -24,6 +24,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
           child: InkWell(
             onTap: () {
               // TODO: 뒤로 가기 기능
+              print('click go back button');
             },
             child: Container(
               alignment: Alignment.center,
@@ -61,16 +62,17 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
               const SizedBox(height: 30),
               const Text(
                 "언어",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 7),
               GestureDetector(
                 onTap: () {
                   // TODO: 언어 목록 보여주기
+                  print('click language list button');
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 48,
+                  height: 60,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: ShapeDecoration(
@@ -81,7 +83,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("선택한 언어"),
+                      Text("선택한 언어" , style: TextStyle(fontSize: 17),),
                       Icon(
                         Icons.arrow_drop_down_circle,
                         color: Colors.grey,
@@ -90,19 +92,20 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 30),
               const Text(
                 "화폐",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 7),
               GestureDetector(
                 onTap: () {
-                  // TODO: 통화 목록 보여주기
+                  // TODO: 화폐 목록 보여주기
+                  print('click currency list button');
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 48,
+                  height: 60,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: ShapeDecoration(
@@ -113,7 +116,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("선택한 화폐"),
+                      Text("선택한 화폐", style: TextStyle(fontSize: 17),),
                       Icon(
                         Icons.arrow_drop_down_circle,
                         color: Colors.grey,
@@ -129,7 +132,6 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
       floatingActionButton: Container(
         width: double.infinity,
         height: 48,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
         decoration: ShapeDecoration(
           color: Colors.black12,
@@ -140,10 +142,22 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(5),
           onTap: () {
-            // TODO: 설정한 언어와 통화 적용 로직
+            print('click done button');
           },
-          child: const Center(
-            child: Text("완료"),
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.lightGreen,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: const Center(
+              child: Text(
+                "완료",
+                style: TextStyle(
+                  color: Colors.white, // 텍스트 색상 설정
+                ),
+              ),
+            ),
           ),
         ),
       ),
