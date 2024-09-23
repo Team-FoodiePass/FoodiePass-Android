@@ -37,96 +37,89 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
           ),
         ),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.white, Colors.white70])),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "어디에서 새로운 미식을 즐기고 계신가요?\n 여행지를 선택하세요.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20, // 텍스트 크기
-                    fontWeight: FontWeight.bold,
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                "어디에서 새로운 미식을 즐기고 계신가요?\n 여행지를 선택하세요.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20, // 텍스트 크기
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 30),
-              const Text(
-                "언어",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 7),
-              GestureDetector(
-                onTap: () {
-                  // TODO: 언어 목록 보여주기
-                  print('click language list button');
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 60,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          side: const BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.circular(5))),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("선택한 언어" , style: TextStyle(fontSize: 17),),
-                      Icon(
-                        Icons.arrow_drop_down_circle,
-                        color: Colors.grey,
-                      )
-                    ],
-                  ),
+            ),
+            const SizedBox(height: 30),
+            const Text(
+              "언어",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 7),
+            GestureDetector(
+              onTap: () {
+                // TODO: 언어 목록 보여주기
+                print('click language list button');
+              },
+              child: Container(
+                width: double.infinity,
+                height: 60,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: const BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(5))),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("선택한 언어" , style: TextStyle(fontSize: 17),),
+                    Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: Colors.grey,
+                    )
+                  ],
                 ),
               ),
-              const SizedBox(height: 30),
-              const Text(
-                "화폐",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 7),
-              GestureDetector(
-                onTap: () {
-                  // TODO: 화폐 목록 보여주기
-                  print('click currency list button');
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 60,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          side: const BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.circular(5))),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("선택한 화폐", style: TextStyle(fontSize: 17),),
-                      Icon(
-                        Icons.arrow_drop_down_circle,
-                        color: Colors.grey,
-                      )
-                    ],
-                  ),
+            ),
+            const SizedBox(height: 30),
+            const Text(
+              "화폐",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 7),
+            GestureDetector(
+              onTap: () {
+                // TODO: 화폐 목록 보여주기
+                print('click currency list button');
+              },
+              child: Container(
+                width: double.infinity,
+                height: 60,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: const BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(5))),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("선택한 화폐", style: TextStyle(fontSize: 17),),
+                    Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: Colors.grey,
+                    )
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: Container(
