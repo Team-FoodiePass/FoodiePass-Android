@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'pages/homepage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const FoodiePass());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FoodiePass extends StatelessWidget {
+  const FoodiePass({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FoodiePass HomePage Test',
+      title: 'FoodiePass',
       theme: ThemeData(
         // This is the theme of your application.
         //

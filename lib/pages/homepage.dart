@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center, // 중앙 정렬
                 children: [
                   // 왼쪽 컬럼: 여행지 텍스트와 아이콘
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                     //crossAxisAlignment: CrossAxisAlignment.start, // 좌측 정렬
                     mainAxisAlignment: MainAxisAlignment.center, // 수직 중앙 정렬
                     crossAxisAlignment: CrossAxisAlignment.center, // 수평 중앙 정렬
-                    children: const [
+                    children: [
                       Text(
                         '여행지',
                         style: TextStyle(
@@ -77,12 +77,12 @@ class HomePage extends StatelessWidget {
                       Icon(Icons.luggage, size: 30), // 아이콘
                     ],
                   ),
-                  const SizedBox(width: 50),
+                  SizedBox(width: 50),
                   // 오른쪽 컬럼: English와 USD 텍스트 중앙 정렬
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center, // 수직 중앙 정렬
                     crossAxisAlignment: CrossAxisAlignment.center, // 수평 중앙 정렬
-                    children: const [
+                    children: [
                       Text(
                         'English(US)', // 언어 정보
                         style: TextStyle(
