@@ -7,6 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       // AppBar 설정
       appBar: AppBar(
         automaticallyImplyLeading: false, // 뒤로가기 버튼을 자동으로 넣지 않음
@@ -31,10 +32,13 @@ class HomePage extends StatelessWidget {
             GestureDetector(
               onTap: () {}, // 클릭 시 동작할 코드 (현재는 비어 있음)
               // 시작 이미지
-              child: SvgPicture.asset(
-                'assets/images/home/Button_Start.svg',
-                height: 300, // 이미지 높이
-                width: 300, // 이미지 너비
+              child: Container(
+                color: Colors.white, // 배경 흰색 설정
+                height: 350, // 이미지 높이
+                width: 350, // 이미지 너비
+                child: SvgPicture.asset(
+                  'assets/images/home/Button_Start.svg',
+                ),
               ),
             ),
             // 여행지 정보 컨테이너
@@ -56,7 +60,6 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center, // 중앙 정렬
                 children: [
-
                   // 왼쪽 컬럼: 여행지 텍스트와 아이콘
                   Column(
                     //crossAxisAlignment: CrossAxisAlignment.start, // 좌측 정렬
@@ -70,15 +73,11 @@ class HomePage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
                       SizedBox(height: 10), // 텍스트와 아이콘 사이 간격
-
                       Icon(Icons.luggage, size: 30), // 아이콘
                     ],
                   ),
-
                   const SizedBox(width: 50),
-
                   // 오른쪽 컬럼: English와 USD 텍스트 중앙 정렬
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center, // 수직 중앙 정렬
@@ -91,9 +90,7 @@ class HomePage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
                       SizedBox(height: 10),
-
                       Text(
                         'USD',
                         style: TextStyle(
@@ -106,12 +103,10 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-
             // 프로필, 여행지 설정 버튼
             Row(
               mainAxisAlignment: MainAxisAlignment.center, // 버튼 중앙 정렬
               children: [
-
                 // 프로필
                 Flexible(
                   child: ElevatedButton(
@@ -134,9 +129,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(width: 20),
-
                 // 여행지
                 Flexible(
                   child: ElevatedButton(
@@ -161,9 +154,7 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: 10),
-
             // 하단 메시지
             const Text(
               'made by TEAM FoodiePass',
