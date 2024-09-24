@@ -1,8 +1,33 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:foodiepass_android/pages/destination_setting_page.dart';
+import 'package:foodiepass_android/pages/profile_setting_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  File? _image; // 선택된 이미지 파일을 저장하는 변수
+
+  Future<void> _pickImageFromCamera() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path); // 촬영된 이미지를 상태에 저장
+      });
+    } else {
+      print('선택된 이미지가 없습니다.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,16 +35,20 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       // AppBar 설정
       appBar: AppBar(
-        automaticallyImplyLeading: false, // 뒤로가기 버튼을 자동으로 넣지 않음
+        automaticallyImplyLeading: false,
+        // 뒤로가기 버튼을 자동으로 넣지 않음
         // 타이틀
         title: const Text('FoodiePass',
             style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 60)),
-        centerTitle: true, // 타이틀 가운데 정렬
-        backgroundColor: Colors.white, // AppBar 배경 흰색
-        elevation: 0, // AppBar 그림자 제거
+        centerTitle: true,
+        // 타이틀 가운데 정렬
+        backgroundColor: Colors.white,
+        // AppBar 배경 흰색
+        elevation: 0,
+        // AppBar 그림자 제거
         toolbarHeight: 120, // AppBar 높이 설정
       ),
       body: Padding(
@@ -28,9 +57,12 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween, // 위젯들을 상하로 배치
           crossAxisAlignment: CrossAxisAlignment.center, // 위젯들을 좌우 가운데 정렬
           children: [
-            // 이미지 클릭 시 이벤트 처리
+            // 이미지 클릭시
             GestureDetector(
-              onTap: () {}, // 클릭 시 동작할 코드 (현재는 비어 있음)
+              onTap: () {
+                _pickImageFromCamera(); // 카메라 실행 함수 호출
+              },
+
               // 시작 이미지
               child: Container(
                 color: Colors.white, // 배경 흰색 설정
@@ -41,6 +73,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+
             // 여행지 정보 컨테이너
             Container(
               padding: const EdgeInsets.all(20), // 컨테이너 내부 패딩
@@ -110,7 +143,16 @@ class HomePage extends StatelessWidget {
                 // 프로필
                 Flexible(
                   child: ElevatedButton(
-                    onPressed: () {}, // 버튼 클릭 시 동작 (현재 비어 있음)
+                    // 버튼 클릭시
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileSettingPage(fromHomePage: true),
+                          ),
+                      );
+                    },
+
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.lightGreen,
                       shape: RoundedRectangleBorder(
@@ -133,7 +175,15 @@ class HomePage extends StatelessWidget {
                 // 여행지
                 Flexible(
                   child: ElevatedButton(
-                    onPressed: () {}, // 버튼 클릭 시 동작 (현재 비어 있음)
+                    // 버튼 클릭시
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DestinationSettingPage(fromHomePage: true),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.lightGreen,
                       shape: RoundedRectangleBorder(
