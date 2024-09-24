@@ -8,10 +8,10 @@ class ProfileSettingPage extends StatefulWidget {
   const ProfileSettingPage({super.key, required this.fromHomePage});
 
   @override
-  State<ProfileSettingPage> createState() => DestinationSettingPageState();
+  State<ProfileSettingPage> createState() => ProfileSettingPageState();
 }
 
-class DestinationSettingPageState extends State<ProfileSettingPage> {
+class ProfileSettingPageState extends State<ProfileSettingPage> {
 
   @override
   Widget build(BuildContext context) {
