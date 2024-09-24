@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class DestinationSettingPage extends StatefulWidget {
   final bool fromHomePage;
@@ -24,7 +25,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
           child: InkWell(
             onTap: () {
               // TODO: 뒤로 가기 기능
-              print('click go back button');
+              Get.back();
             },
             child: Container(
               alignment: Alignment.center,
@@ -135,7 +136,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(5),
           onTap: () {
-            print('click done button');
+            submitDestinationInfo();
           },
           child: Container(
             width: double.infinity,
@@ -156,5 +157,11 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+
+  // TODO: 설정한 여행지 정보를 저장한 뒤에 뒤로 가기
+  void submitDestinationInfo() {
+    print("click submit destination info button");
+    Get.back();
   }
 }

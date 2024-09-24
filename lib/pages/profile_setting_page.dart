@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class ProfileSettingPage extends StatefulWidget {
   final bool fromHomePage;
@@ -135,8 +136,7 @@ class DestinationSettingPageState extends State<ProfileSettingPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(5),
           onTap: () {
-            // TODO: 선택한 언어와 화폐를 저장한 후에 뒤로 이동
-            print('click done button');
+            submitProfileInfo();
           },
           child: Container(
             width: double.infinity,
@@ -157,5 +157,11 @@ class DestinationSettingPageState extends State<ProfileSettingPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+
+  // TODO: 설정한 프로필 정보를 저장한 뒤에 뒤로 가기
+  void submitProfileInfo() {
+    print("click submit profile info button");
+    Get.back();
   }
 }
