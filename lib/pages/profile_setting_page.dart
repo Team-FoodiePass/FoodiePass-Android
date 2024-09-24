@@ -24,8 +24,7 @@ class ProfileSettingPageState extends State<ProfileSettingPage> {
           height: 50,
           child: InkWell(
             onTap: () {
-              // TODO: 뒤로 가기 기능
-              print('click go back button');
+              Get.back();
             },
             child: Container(
               alignment: Alignment.center,

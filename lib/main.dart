@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'pages/home_page.dart';
 import 'pages/profile_setting_page.dart';
 import 'pages/destination_setting_page.dart';
@@ -13,7 +14,7 @@ class FoodiePass extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'FoodiePass',
       theme: ThemeData(
         // This is the theme of your application.
@@ -35,9 +36,9 @@ class FoodiePass extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      //home: const HomePage(),
-      //home: const DestinationSettingPage(fromHomePage: true,),
-      home: const ProfileSettingPage(fromHomePage: true,),
+      home: const HomePage(),
+      // home: const DestinationSettingPage(fromHomePage: true,),
+      // home: const ProfileSettingPage(fromHomePage: true,),
 
     );
   }

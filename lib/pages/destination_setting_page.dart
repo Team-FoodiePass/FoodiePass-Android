@@ -24,7 +24,6 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
           height: 50,
           child: InkWell(
             onTap: () {
-              // TODO: 뒤로 가기 기능
               Get.back();
             },
             child: Container(
