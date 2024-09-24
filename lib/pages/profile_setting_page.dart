@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class DestinationSettingPage extends StatefulWidget {
+class ProfileSettingPage extends StatefulWidget {
   final bool fromHomePage;
 
-  const DestinationSettingPage({super.key, required this.fromHomePage});
+  const ProfileSettingPage({super.key, required this.fromHomePage});
 
   @override
-  State<DestinationSettingPage> createState() => DestinationSettingPageState();
+  State<ProfileSettingPage> createState() => ProfileSettingPageState();
 }
 
-class DestinationSettingPageState extends State<DestinationSettingPage> {
+class ProfileSettingPageState extends State<ProfileSettingPage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("여행지 설정"),
+        title: const Text("프로필 설정"),
         centerTitle: true,
         leading: SizedBox(
           width: 100,
@@ -45,7 +45,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
             const Align(
               alignment: Alignment.center,
               child: Text(
-                "어디에서 새로운 미식을 즐기고 계신가요?\n 여행지를 선택하세요.",
+                "당신은 누구인가요?\n 당신에 대해 알려주세요.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20, // 텍스트 크기
@@ -135,7 +135,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(5),
           onTap: () {
-            submitDestinationInfo();
+            submitProfileInfo();
           },
           child: Container(
             width: double.infinity,
@@ -158,9 +158,9 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
     );
   }
 
-  // TODO: 설정한 여행지 정보를 저장한 뒤에 뒤로 가기
-  void submitDestinationInfo() {
-    print("click submit destination info button");
+  // TODO: 설정한 프로필 정보를 저장한 뒤에 뒤로 가기
+  void submitProfileInfo() {
+    print("click submit profile info button");
     Get.back();
   }
 }

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'pages/homepage.dart';
+import 'package:get/get.dart';
+import 'pages/home_page.dart';
+import 'pages/profile_setting_page.dart';
+import 'pages/destination_setting_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const FoodiePass());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FoodiePass extends StatelessWidget {
+  const FoodiePass({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FoodiePass HomePage Test',
+    return GetMaterialApp(
+      title: 'FoodiePass',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -32,7 +35,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+
       home: const HomePage(),
+      // home: const DestinationSettingPage(fromHomePage: true,),
+      // home: const ProfileSettingPage(fromHomePage: true,),
+
     );
   }
 }
