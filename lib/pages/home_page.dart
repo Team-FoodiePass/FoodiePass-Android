@@ -5,7 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:foodiepass_android/pages/destination_setting_page.dart';
 import 'package:foodiepass_android/pages/profile_setting_page.dart';
-import 'package:foodiepass_android/pages/menu_select_page.dart';
+
+import 'menu_select_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute(builder: (context) => MenuSelectPage()),
       );
+
     } else {
       print('선택된 이미지가 없습니다.');
     }
@@ -155,7 +157,8 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ProfileSettingPage(fromHomePage: true),
+                          builder: (context) =>
+                          const ProfileSettingPage(fromHomePage: true),
                         ),
                       );
                     },
