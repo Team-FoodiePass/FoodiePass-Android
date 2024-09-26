@@ -31,9 +31,7 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute(builder: (context) => MenuSelectPage()),
       );
-    }
-
-    else {
+    } else {
       print('선택된 이미지가 없습니다.');
     }
   }
@@ -158,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              ProfileSettingPage(fromHomePage: true),
+                              const ProfileSettingPage(fromHomePage: true),
                         ),
                       );
                     },
@@ -190,8 +188,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              DestinationSettingPage(fromHomePage: true),
+                          builder: (context) => const DestinationSettingPage(),
                         ),
                       );
                     },
