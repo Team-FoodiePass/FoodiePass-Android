@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:foodiepass_android/pages/destination_setting_page.dart';
 import 'package:foodiepass_android/pages/profile_setting_page.dart';
 
+import 'menu_select_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -24,6 +26,13 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _image = File(pickedFile.path); // 촬영된 이미지를 상태에 저장
       });
+
+      //메뉴 선택 페이지로 이동
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MenuSelectPage()),
+      );
+
     } else {
       print('선택된 이미지가 없습니다.');
     }
