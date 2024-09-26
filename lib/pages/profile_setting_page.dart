@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:foodiepass_android/pages/home_page.dart';
 import 'package:get/get.dart';
 
 class ProfileSettingPage extends StatefulWidget {
@@ -12,7 +13,6 @@ class ProfileSettingPage extends StatefulWidget {
 }
 
 class ProfileSettingPageState extends State<ProfileSettingPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,8 +61,7 @@ class ProfileSettingPageState extends State<ProfileSettingPage> {
             const SizedBox(height: 7),
             GestureDetector(
               onTap: () {
-                // TODO: 언어 목록 보여주기
-                print('click language list button');
+                showLanguageList();
               },
               child: Container(
                 width: double.infinity,
@@ -77,7 +76,10 @@ class ProfileSettingPageState extends State<ProfileSettingPage> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("선택한 언어" , style: TextStyle(fontSize: 17),),
+                    Text(
+                      "선택한 언어",
+                      style: TextStyle(fontSize: 17),
+                    ),
                     Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.grey,
@@ -94,8 +96,7 @@ class ProfileSettingPageState extends State<ProfileSettingPage> {
             const SizedBox(height: 7),
             GestureDetector(
               onTap: () {
-                // TODO: 화폐 목록 보여주기
-                print('click currency list button');
+                showCurrencyList();
               },
               child: Container(
                 width: double.infinity,
@@ -110,7 +111,10 @@ class ProfileSettingPageState extends State<ProfileSettingPage> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("선택한 화폐", style: TextStyle(fontSize: 17),),
+                    Text(
+                      "선택한 화폐",
+                      style: TextStyle(fontSize: 17),
+                    ),
                     Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.grey,
@@ -158,9 +162,24 @@ class ProfileSettingPageState extends State<ProfileSettingPage> {
     );
   }
 
-  // TODO: 설정한 프로필 정보를 저장한 뒤에 뒤로 가기
+  void showLanguageList() {
+    // TODO: 언어 목록 보여주기
+    print('click language list button');
+  }
+
+  void showCurrencyList() {
+    // TODO: 화폐 목록 보여주기
+    print('click currency list button');
+  }
+
   void submitProfileInfo() {
+    // TODO: 언어와 화폐 정보 저장
     print("click submit profile info button");
-    Get.back();
+
+    if (widget.fromHomePage) {
+      Get.back();
+    } else {
+      Get.to(() => const HomePage());
+    }
   }
 }

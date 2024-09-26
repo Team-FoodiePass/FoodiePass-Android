@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ProfileSettingPage(fromHomePage: true),
+                              builder: (context) => const ProfileSettingPage(fromHomePage: true),
                           ),
                       );
                     },
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DestinationSettingPage(fromHomePage: true),
+                          builder: (context) => const DestinationSettingPage(),
                         ),
                       );
                     },
