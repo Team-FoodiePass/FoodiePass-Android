@@ -165,9 +165,10 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
     print('click currency list button');
   }
 
-  // TODO: 설정한 여행지 정보를 저장한 뒤에 뒤로 가기
   void submitDestinationInfo() {
+    // TODO: 설정한 여행지 정보를 저장한 뒤에 뒤로 가기
     print("click submit destination info button");
+
     Get.back();
   }
 }
