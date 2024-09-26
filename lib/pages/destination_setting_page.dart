@@ -3,9 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class DestinationSettingPage extends StatefulWidget {
-  final bool fromHomePage;
 
-  const DestinationSettingPage({super.key, required this.fromHomePage});
+  const DestinationSettingPage({super.key});
 
   @override
   State<DestinationSettingPage> createState() => DestinationSettingPageState();
@@ -61,8 +60,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
             const SizedBox(height: 7),
             GestureDetector(
               onTap: () {
-                // TODO: 언어 목록 보여주기
-                print('click language list button');
+                showLanguageList();
               },
               child: Container(
                 width: double.infinity,
@@ -94,8 +92,7 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
             const SizedBox(height: 7),
             GestureDetector(
               onTap: () {
-                // TODO: 화폐 목록 보여주기
-                print('click currency list button');
+                showCurrencyList();
               },
               child: Container(
                 width: double.infinity,
@@ -158,9 +155,20 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
     );
   }
 
-  // TODO: 설정한 여행지 정보를 저장한 뒤에 뒤로 가기
+  void showLanguageList() {
+    // TODO: 언어 목록 보여주기
+    print('click language list button');
+  }
+
+  void showCurrencyList() {
+    // TODO: 화폐 목록 보여주기
+    print('click currency list button');
+  }
+
   void submitDestinationInfo() {
+    // TODO: 설정한 여행지 정보를 저장한 뒤에 뒤로 가기
     print("click submit destination info button");
+
     Get.back();
   }
 }

@@ -155,11 +155,10 @@ class _HomePageState extends State<HomePage> {
                     // 버튼 클릭시
                     onPressed: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                          const ProfileSettingPage(fromHomePage: true),
-                        ),
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfileSettingPage(fromHomePage: true),
+                          ),
                       );
                     },
 
