@@ -32,14 +32,15 @@ class FoodiePass extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
         useMaterial3: true,
       ),
 
-      home: const HomePage(),
-      // home: const DestinationSettingPage(fromHomePage: true,),
-      // home: const ProfileSettingPage(fromHomePage: true,),
-
+      // home: const HomePage(),
+      // home: const DestinationSettingPage(),
+      home: const ProfileSettingPage(
+        fromHomePage: false,
+      ),
     );
   }
 }
