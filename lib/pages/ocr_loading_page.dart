@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:foodiepass_android/pages/menu_select_page.dart';
 
 class OcrLoadingPage extends StatefulWidget {
   const OcrLoadingPage({super.key});
@@ -9,6 +10,18 @@ class OcrLoadingPage extends StatefulWidget {
 }
 
 class OcrLoadingPageState extends State<OcrLoadingPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    // 3초 뒤에 menu_select_page로 이동
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => MenuSelectPage()),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

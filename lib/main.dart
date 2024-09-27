@@ -36,11 +36,11 @@ class FoodiePass extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      // home: const HomePage(),
+      home: const HomePage(),
       // home: const DestinationSettingPage(),
-      home: const ProfileSettingPage(
-        fromHomePage: false,
-      ),
+      // home: const ProfileSettingPage(
+      //   fromHomePage: false,
+      // ),
     );
   }
 }
