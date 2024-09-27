@@ -5,8 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:foodiepass_android/pages/destination_setting_page.dart';
 import 'package:foodiepass_android/pages/profile_setting_page.dart';
-
-import 'menu_select_page.dart';
+import 'package:foodiepass_android/pages/ocr_loading_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       //메뉴 선택 페이지로 이동
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MenuSelectPage()),
+        MaterialPageRoute(builder: (context) => OcrLoadingPage()),
       );
 
     } else {
@@ -69,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             // 이미지 클릭시
             GestureDetector(
               onTap: () {
-                _pickImageFromCamera(); // 카메라 실행 함수 호출
+                _pickImageFromCamera(); // 카메라 실행 함수 호출s
               },
 
               // 시작 이미지
