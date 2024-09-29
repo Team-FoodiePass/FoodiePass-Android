@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodiepass_android/pages/food_detail_page.dart';
 
 class MenuSelectPage extends StatelessWidget {
   @override
@@ -24,20 +25,21 @@ class MenuSelectPage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.shopping_cart, color: Colors.black),
             onPressed: () {
-              print("Go to Order Page"); // 임시
+              print("Go to Order Page"); // 주문 페이지 이동 (임시)
             },
           ),
         ],
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        toolbarHeight: 80, // 높이 설정
+        toolbarHeight: 80, // 앱바 높이 설정
       ),
       body: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridView.builder(
+              padding: const EdgeInsets.only(bottom: 100), // 하단 패딩을 늘려서 스크롤 여유 확보
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // 한 줄에 2개의 항목
                 crossAxisSpacing: 8, // 항목 사이의 가로 간격
@@ -46,7 +48,7 @@ class MenuSelectPage extends StatelessWidget {
               ),
               itemCount: menuItems.length, // 메뉴 아이템의 개수
               itemBuilder: (context, index) {
-                return MenuItemCard(item: menuItems[index]);
+                return MenuItemCard(item: menuItems[index]); // 개별 메뉴 아이템 카드 생성
               },
             ),
           ),
@@ -56,25 +58,26 @@ class MenuSelectPage extends StatelessWidget {
             right: 0,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Container(
-                color: Colors.transparent, // 배경을 투명하게 설정
+              child: SizedBox(
+                width: double.infinity, // 버튼 너비를 화면 전체로 설정
+                height: 48, // 버튼 높이 설정
                 child: ElevatedButton(
                   onPressed: () {
-                    print("Go to Order Page"); // 임시
+                    print("Go to Order Page"); // 주문 페이지 이동 (임시)
                   },
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.lightGreen, // 버튼 배경 색상
+                    padding: EdgeInsets.zero, // 기본 패딩 제거
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5), // 버튼 모서리 둥글게 설정
+                    ),
+                  ),
+                  child: const Text(
                     'Review Order',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightGreen,
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15), // 버튼 모서리 둥글게
                     ),
                   ),
                 ),
@@ -99,7 +102,19 @@ class MenuItemCard extends StatelessWidget {
       color: Colors.white, // 카드 배경 흰색
       child: InkWell(
         onTap: () {
-          print("Go to Food Info Page"); // 이미지 클릭 시 출력
+          // 메뉴 아이템 클릭 시 FoodDetailPage로 이동
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FoodDetailPage(
+                foodName: item.name, // 영어 메뉴 이름
+                koreanName: item.koreanName, // 한글 메뉴 이름
+                foodImage: item.imagePath, // 메뉴 이미지 경로
+                priceUsd: item.priceUsd, // 달러 가격
+                priceKrw: item.priceKrw, // 원화 가격
+              ),
+            ),
+          );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -120,16 +135,12 @@ class MenuItemCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                  // 영어 메뉴 이름
+                  Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)), // 영어 메뉴 이름
                   SizedBox(height: 4),
-                  Text(item.koreanName),
-                  // 한글 메뉴 이름
+                  Text(item.koreanName), // 한글 메뉴 이름
                   SizedBox(height: 4),
-                  Text('\$${item.priceUsd.toStringAsFixed(2)}'),
-                  // 달러 가격
-                  Text('₩${item.priceKrw.toStringAsFixed(0)}'),
-                  // 원화 가격
+                  Text('\$${item.priceUsd.toStringAsFixed(2)}'), // 달러 가격
+                  Text('₩${item.priceKrw.toStringAsFixed(0)}'), // 원화 가격
                 ],
               ),
             ),
