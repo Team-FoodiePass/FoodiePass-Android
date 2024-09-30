@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'home_page.dart';
 
 class OrderScriptPage extends StatefulWidget {
   const OrderScriptPage({super.key});
@@ -165,10 +168,12 @@ class OrderScriptPageState extends State<OrderScriptPage> {
   void clickHomeButton() {
     // TODO: Go main
     print("click go home button");
+    Get.to(() => const HomePage());
   }
 
   void finishOrder() {
     // TODO: Go main
     print("click finish button");
+    Get.to(() => const HomePage());
   }
 }
