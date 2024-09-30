@@ -16,7 +16,9 @@ class OrderScriptPageState extends State<OrderScriptPage> {
     final double bodyHeight = screenHeight - appBarHeight;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         toolbarHeight: appBarHeight,
         title: Row(
