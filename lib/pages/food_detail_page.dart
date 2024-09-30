@@ -107,7 +107,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '\$${widget.priceUsd.toStringAsFixed(2)}',
+                  '\$ ${widget.priceUsd.toStringAsFixed(2)}',
                   style: TextStyle(fontSize: 18),
                 ),
               ],
@@ -121,7 +121,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '₩${widget.priceKrw.toStringAsFixed(0)}',
+                  '₩ ${widget.priceKrw.toStringAsFixed(0)}',
                   style: TextStyle(fontSize: 18),
                 ),
               ],
@@ -185,11 +185,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '\$${totalPriceUsd.toStringAsFixed(2)} (USD)',
+                        '\$ ${totalPriceUsd.toStringAsFixed(2)} (USD)',
                         style: TextStyle(fontSize: 16),
                       ),
                       Text(
-                        '₩${totalPriceKrw.toStringAsFixed(0)} (KRW)',
+                        '₩ ${totalPriceKrw.toStringAsFixed(0)} (KRW)',
                         style: TextStyle(fontSize: 16),
                       ),
                     ],

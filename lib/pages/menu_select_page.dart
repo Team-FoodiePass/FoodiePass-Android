@@ -139,8 +139,8 @@ class MenuItemCard extends StatelessWidget {
                   SizedBox(height: 4),
                   Text(item.koreanName), // 한글 메뉴 이름
                   SizedBox(height: 4),
-                  Text('\$${item.priceUsd.toStringAsFixed(2)}'), // 달러 가격
-                  Text('₩${item.priceKrw.toStringAsFixed(0)}'), // 원화 가격
+                  Text('\$ ${item.priceUsd.toStringAsFixed(2)}'), // 달러 가격
+                  Text('₩ ${item.priceKrw.toStringAsFixed(0)}'), // 원화 가격
                 ],
               ),
             ),
