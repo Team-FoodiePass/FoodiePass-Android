@@ -78,9 +78,19 @@ class OrderListPageState extends State<OrderListPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        title: const Text(
+          'Menu',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
         backgroundColor: Colors.white,
-        title: const Text('장바구니'),
+        elevation: 0,
         centerTitle: true,
+        toolbarHeight: 80, // 앱바 높이 설정
+
         leading: SizedBox(
           width: 100,
           height: 50,
