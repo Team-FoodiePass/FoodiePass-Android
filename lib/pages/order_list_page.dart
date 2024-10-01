@@ -272,7 +272,7 @@ class OrderListPageState extends State<OrderListPage> {
   void deleteItem(int index) {
     // TODO: 음식 삭제
     setState(() {
-      foodItems.remove(index);
+      foodItems.removeAt(index);
     });
   }
 
