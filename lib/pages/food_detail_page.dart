@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodiepass_android/pages/order_script_page.dart';
 
 class FoodDetailPage extends StatefulWidget {
   final String foodName; // 음식 이름
@@ -52,17 +53,32 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     return Scaffold(
       backgroundColor: Colors.white, // 페이지 전체 배경 흰색
       appBar: AppBar(
+        title: Text(
+          widget.foodName,
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ), // 음식 이름을 앱바에 표시
         backgroundColor: Colors.white,
-        title: Text(widget.foodName, style: TextStyle(color: Colors.black)), // 음식 이름을 앱바에 표시
+        elevation: 0,
+        centerTitle: true,
+        toolbarHeight: 80,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // 검정색 뒤로가기 버튼
+          icon: Icon(Icons.arrow_back_ios, size: 30, color: Colors.black),
+          // 검정색 뒤로가기 버튼
           onPressed: () => Navigator.pop(context), // 뒤로가기 버튼
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart, color: Colors.black), // 검정색 장바구니 버튼
+            icon: Icon(Icons.shopping_cart, size: 30, color: Colors.black),
+            // 검정색 장바구니 버튼
             onPressed: () {
-              print("Go to Order Page"); // 장바구니 이동 (임시)
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => OrderScriptPage()),
+              );
             },
           ),
         ],
@@ -73,7 +89,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 음식 이미지 표시
-            Image.asset(widget.foodImage, width: double.infinity, height: 200, fit: BoxFit.cover),
+            Image.asset(widget.foodImage,
+                width: double.infinity, height: 200, fit: BoxFit.cover),
 
             SizedBox(height: 20),
 
@@ -144,7 +161,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       icon: Icon(Icons.remove_circle_outline),
                       onPressed: () {
                         setState(() {
-                          if (quantity > 1) quantity--; // 수량이 1 이하로는 내려가지 않도록 설정
+                          if (quantity > 0)
+                            quantity--; // 수량이 1 이하로는 내려가지 않도록 설정
                         });
                       },
                     ),
@@ -205,7 +223,10 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 height: 48, // 버튼 높이 설정
                 child: ElevatedButton(
                   onPressed: () {
-                    print("Go to Order Page"); // 주문 페이지 이동 (임시)
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => OrderScriptPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.lightGreen, // 버튼 배경색만 다르게 설정

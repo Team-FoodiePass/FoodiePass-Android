@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/food_detail_page.dart';
+import 'package:foodiepass_android/pages/order_script_page.dart';
 
 class MenuSelectPage extends StatelessWidget {
   @override
@@ -16,16 +17,19 @@ class MenuSelectPage extends StatelessWidget {
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios, size: 30, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart, color: Colors.black),
+            icon: Icon(Icons.shopping_cart, size: 30, color: Colors.black),
             onPressed: () {
-              print("Go to Order Page"); // 주문 페이지 이동 (임시)
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => OrderScriptPage()),
+              );
             },
           ),
         ],
@@ -39,14 +43,16 @@ class MenuSelectPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridView.builder(
-              padding: const EdgeInsets.only(bottom: 100), // 하단 패딩을 늘려서 스크롤 여유 확보
+              padding: const EdgeInsets.only(bottom: 100),
+              // 하단 패딩을 늘려서 스크롤 여유 확보
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // 한 줄에 2개의 항목
                 crossAxisSpacing: 8, // 항목 사이의 가로 간격
                 mainAxisSpacing: 8, // 항목 사이의 세로 간격
                 childAspectRatio: 0.75, // 항목의 가로 세로 비율
               ),
-              itemCount: menuItems.length, // 메뉴 아이템의 개수
+              itemCount: menuItems.length,
+              // 메뉴 아이템의 개수
               itemBuilder: (context, index) {
                 return MenuItemCard(item: menuItems[index]); // 개별 메뉴 아이템 카드 생성
               },
@@ -63,7 +69,11 @@ class MenuSelectPage extends StatelessWidget {
                 height: 48, // 버튼 높이 설정
                 child: ElevatedButton(
                   onPressed: () {
-                    print("Go to Order Page"); // 주문 페이지 이동 (임시)
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OrderScriptPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.lightGreen, // 버튼 배경 색상
@@ -107,10 +117,14 @@ class MenuItemCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => FoodDetailPage(
-                foodName: item.name, // 영어 메뉴 이름
-                koreanName: item.koreanName, // 한글 메뉴 이름
-                foodImage: item.imagePath, // 메뉴 이미지 경로
-                priceUsd: item.priceUsd, // 달러 가격
+                foodName: item.name,
+                // 영어 메뉴 이름
+                koreanName: item.koreanName,
+                // 한글 메뉴 이름
+                foodImage: item.imagePath,
+                // 메뉴 이미지 경로
+                priceUsd: item.priceUsd,
+                // 달러 가격
                 priceKrw: item.priceKrw, // 원화 가격
               ),
             ),
@@ -135,12 +149,17 @@ class MenuItemCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)), // 영어 메뉴 이름
+                  Text(item.name,
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  // 영어 메뉴 이름
                   SizedBox(height: 4),
-                  Text(item.koreanName), // 한글 메뉴 이름
+                  Text(item.koreanName),
+                  // 한글 메뉴 이름
                   SizedBox(height: 4),
-                  Text('\$ ${item.priceUsd.toStringAsFixed(2)}'), // 달러 가격
-                  Text('₩ ${item.priceKrw.toStringAsFixed(0)}'), // 원화 가격
+                  Text('\$ ${item.priceUsd.toStringAsFixed(2)}'),
+                  // 달러 가격
+                  Text('₩ ${item.priceKrw.toStringAsFixed(0)}'),
+                  // 원화 가격
                 ],
               ),
             ),

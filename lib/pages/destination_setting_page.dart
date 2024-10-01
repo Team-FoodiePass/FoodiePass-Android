@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class DestinationSettingPage extends StatefulWidget {
-
   const DestinationSettingPage({super.key});
 
   @override
@@ -11,13 +10,23 @@ class DestinationSettingPage extends StatefulWidget {
 }
 
 class DestinationSettingPageState extends State<DestinationSettingPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("여행지 설정"),
+        title: const Text(
+          "여행지 설정",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
+        toolbarHeight: 80,
         leading: SizedBox(
           width: 100,
           height: 50,
@@ -75,7 +84,10 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("선택한 언어" , style: TextStyle(fontSize: 17),),
+                    Text(
+                      "선택한 언어",
+                      style: TextStyle(fontSize: 17),
+                    ),
                     Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.grey,
@@ -107,7 +119,10 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("선택한 화폐", style: TextStyle(fontSize: 17),),
+                    Text(
+                      "선택한 화폐",
+                      style: TextStyle(fontSize: 17),
+                    ),
                     Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.grey,
@@ -144,7 +159,9 @@ class DestinationSettingPageState extends State<DestinationSettingPage> {
               child: Text(
                 "완료",
                 style: TextStyle(
-                  color: Colors.white, // 텍스트 색상 설정
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

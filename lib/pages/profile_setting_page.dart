@@ -16,9 +16,20 @@ class ProfileSettingPageState extends State<ProfileSettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("프로필 설정"),
+        title: const Text(
+          "프로필 설정",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
+        toolbarHeight: 80,
         leading: SizedBox(
           width: 100,
           height: 50,
@@ -151,7 +162,9 @@ class ProfileSettingPageState extends State<ProfileSettingPage> {
               child: Text(
                 "완료",
                 style: TextStyle(
-                  color: Colors.white, // 텍스트 색상 설정
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
