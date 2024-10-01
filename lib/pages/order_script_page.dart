@@ -34,6 +34,7 @@ class OrderScriptPageState extends State<OrderScriptPage> {
               icon: const Icon(
                 Icons.arrow_back_ios,
                 size: 30,
+                color: Colors.black,
               ),
             ),
             IconButton(
@@ -43,6 +44,7 @@ class OrderScriptPageState extends State<OrderScriptPage> {
               icon: const Icon(
                 Icons.home,
                 size: 30,
+                color: Colors.black,
               ),
             ),
           ],
@@ -163,6 +165,7 @@ class OrderScriptPageState extends State<OrderScriptPage> {
   void clickBackButton() {
     // TODO: Get.back()
     print("click go back button");
+    Navigator.pop(context);
   }
 
   void clickHomeButton() {

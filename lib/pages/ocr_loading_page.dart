@@ -25,9 +25,12 @@ class OcrLoadingPageState extends State<OcrLoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text(' '),
-          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          toolbarHeight: 80,
           leading: IconButton(
             onPressed: () {
               clickBackButton();
@@ -35,6 +38,7 @@ class OcrLoadingPageState extends State<OcrLoadingPage> {
             icon: const Icon(
               Icons.arrow_back_ios,
               size: 30,
+              color: Colors.black,
             ),
           ),
         ),
