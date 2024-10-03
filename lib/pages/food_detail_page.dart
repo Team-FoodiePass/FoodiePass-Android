@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodiepass_android/pages/order_script_page.dart';
+import 'package:foodiepass_android/pages/order_list_page.dart';
 
 class FoodDetailPage extends StatefulWidget {
   final String foodName; // 음식 이름
@@ -77,7 +77,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => OrderScriptPage()),
+                MaterialPageRoute(builder: (context) => OrderListPage()),
               );
             },
           ),
@@ -225,7 +225,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderScriptPage()),
+                      MaterialPageRoute(builder: (context) => OrderListPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

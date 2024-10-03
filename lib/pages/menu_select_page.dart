@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/food_detail_page.dart';
-import 'package:foodiepass_android/pages/order_script_page.dart';
+import 'package:foodiepass_android/pages/order_list_page.dart';
 
 class MenuSelectPage extends StatelessWidget {
   @override
@@ -28,7 +28,7 @@ class MenuSelectPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => OrderScriptPage()),
+                MaterialPageRoute(builder: (context) => OrderListPage()),
               );
             },
           ),
@@ -72,7 +72,7 @@ class MenuSelectPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => OrderScriptPage()),
+                          builder: (context) => OrderListPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
