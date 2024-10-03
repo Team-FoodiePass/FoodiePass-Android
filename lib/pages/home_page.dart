@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                 height: 350, // 이미지 높이
                 width: 350, // 이미지 너비
                 child: SvgPicture.asset(
-                  'assets/images/home/Button_Start.svg',
+                  'assets/images/home/startButton.svg',
                 ),
               ),
             ),

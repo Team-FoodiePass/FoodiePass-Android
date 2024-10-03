@@ -7,10 +7,10 @@ class OrderScriptPage extends StatefulWidget {
   const OrderScriptPage({super.key});
 
   @override
-  State<OrderScriptPage> createState() => OrderScriptPageState();
+  State<OrderScriptPage> createState() => _OrderScriptPageState();
 }
 
-class OrderScriptPageState extends State<OrderScriptPage> {
+class _OrderScriptPageState extends State<OrderScriptPage> {
 
   @override
   Widget build(BuildContext context) {

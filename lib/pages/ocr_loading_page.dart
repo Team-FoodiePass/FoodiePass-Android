@@ -6,10 +6,10 @@ class OcrLoadingPage extends StatefulWidget {
   const OcrLoadingPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => OcrLoadingPageState();
+  State<StatefulWidget> createState() => _OcrLoadingPageState();
 }
 
-class OcrLoadingPageState extends State<OcrLoadingPage> {
+class _OcrLoadingPageState extends State<OcrLoadingPage> {
   @override
   void initState() {
     super.initState();
@@ -56,7 +56,7 @@ class OcrLoadingPageState extends State<OcrLoadingPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                SvgPicture.asset('assets/images/LoadingImage.svg'),
+                SvgPicture.asset('assets/images/loadingImage.svg'),
                 const SizedBox(
                   height: 20,
                 ),

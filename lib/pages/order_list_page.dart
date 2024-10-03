@@ -9,10 +9,10 @@ class OrderListPage extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => OrderListPageState();
+  State<StatefulWidget> createState() => _OrderListPageState();
 }
 
-class OrderListPageState extends State<OrderListPage> {
+class _OrderListPageState extends State<OrderListPage> {
   // 임시 데이터: 음식 목록
   final List<Map<String, dynamic>> foodItems = [
     {
