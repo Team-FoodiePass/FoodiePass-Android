@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:foodiepass_android/pages/home_page.dart';
 import 'package:get/get.dart';
 
@@ -9,10 +8,10 @@ class ProfileSettingPage extends StatefulWidget {
   const ProfileSettingPage({super.key, required this.fromHomePage});
 
   @override
-  State<ProfileSettingPage> createState() => ProfileSettingPageState();
+  State<ProfileSettingPage> createState() => _ProfileSettingPageState();
 }
 
-class ProfileSettingPageState extends State<ProfileSettingPage> {
+class _ProfileSettingPageState extends State<ProfileSettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

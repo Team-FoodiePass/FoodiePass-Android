@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class DestinationSettingPage extends StatefulWidget {
   const DestinationSettingPage({super.key});
 
   @override
-  State<DestinationSettingPage> createState() => DestinationSettingPageState();
+  State<DestinationSettingPage> createState() => _DestinationSettingPageState();
 }
 
-class DestinationSettingPageState extends State<DestinationSettingPage> {
+class _DestinationSettingPageState extends State<DestinationSettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
