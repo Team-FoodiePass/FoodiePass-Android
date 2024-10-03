@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'pages/home_page.dart';
-import 'pages/profile_setting_page.dart';
-import 'pages/destination_setting_page.dart';
 
 void main() {
   runApp(const FoodiePass());
@@ -55,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()), // 메인 화면
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     });
   }
@@ -70,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             // 로고 이미지
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0), // 좌우 여백 설정
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Container(
                 height: MediaQuery.of(context).size.width * 0.6,
                 width: MediaQuery.of(context).size.width * 0.6,
@@ -90,11 +88,11 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Container(),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100.0), // 좌우 20 픽셀 여백 설정
+              padding: const EdgeInsets.symmetric(horizontal: 100.0),
               child: LinearProgressIndicator(
-                minHeight: 8.0, // 프로세스 바 높이
-                backgroundColor: Colors.grey[300], // 배경 색상 설정
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.lightGreen), // 진행 바 색상
+                minHeight: 8.0,
+                backgroundColor: Colors.grey[300],
+                valueColor: const AlwaysStoppedAnimation<Color>(Colors.lightGreen),
               ),
             )
 ,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:foodiepass_android/pages/home_page.dart';
 import 'package:get/get.dart';
 
