@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/order_list_page.dart';
-import 'package:foodiepass_android/models/food.dart'; // food.dart에서 불러옴
+import 'package:foodiepass_android/models/food.dart';
+import 'package:intl/intl.dart';
 
 class FoodDetailPage extends StatefulWidget {
-  final MenuItem item; // MenuItem 객체
+  final Food item; // MenuItem 객체
 
   // 생성자
   FoodDetailPage({required this.item});
@@ -17,14 +18,14 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    double totalPriceUsd = widget.item.priceUsd * quantity; // 수량에 따른 달러 총 가격
-    double totalPriceKrw = widget.item.priceKrw * quantity; // 수량에 따른 원화 총 가격
+    double totalPriceUsd = widget.item.destinationPrice * quantity; // 수량에 따른 달러 총 가격
+    double totalPriceKrw = widget.item.profilePrice * quantity; // 수량에 따른 원화 총 가격
 
     return Scaffold(
       backgroundColor: Colors.white, // 페이지 전체 배경 흰색
       appBar: AppBar(
         title: Text(
-          widget.item.name,
+          widget.item.destinationName,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -66,14 +67,14 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
 
             SizedBox(height: 20),
 
-            // 음식 이름 및 한글 이름
+            // 프로필 및 여행지 이름
             Text(
-              widget.item.name,
+              widget.item.destinationName,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
             Text(
-              widget.item.koreanName,
+              widget.item.profileName,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
 
@@ -81,7 +82,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
 
             // 음식 세부 설명
             Text(
-              widget.item.description, // MenuItem 객체에서 설명을 불러옴
+              widget.item.description, // Food 객체에서 설명을 불러옴
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
 
@@ -92,11 +93,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '가격',
+                  '여행지 가격',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '\$ ${widget.item.priceUsd.toStringAsFixed(2)}',
+                  '\$ ${widget.item.destinationPrice.toStringAsFixed(2)}',
                   style: TextStyle(fontSize: 18),
                 ),
               ],
@@ -106,11 +107,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '현지 가격',
+                  '환산 가격',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '₩ ${widget.item.priceKrw.toStringAsFixed(0)}',
+                  '₩ ${widget.item.profilePrice.toStringAsFixed(0)}',
                   style: TextStyle(fontSize: 18),
                 ),
               ],

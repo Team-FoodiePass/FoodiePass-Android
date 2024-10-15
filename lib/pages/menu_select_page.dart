@@ -102,7 +102,7 @@ class MenuSelectPage extends StatelessWidget {
 
 // 개별 메뉴 아이템을 표시하는 카드 위젯
 class MenuItemCard extends StatelessWidget {
-  final MenuItem item; // MenuItem 객체
+  final Food item; // MenuItem 객체
 
   const MenuItemCard({required this.item});
 
@@ -139,16 +139,16 @@ class MenuItemCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(item.name,
+                  Text(item.destinationName,
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   // 영어 메뉴 이름
                   SizedBox(height: 4),
-                  Text(item.koreanName),
+                  Text(item.profileName),
                   // 한글 메뉴 이름
                   SizedBox(height: 4),
-                  Text('\$ ${item.priceUsd.toStringAsFixed(2)}'),
+                  Text('\$ ${item.destinationPrice.toStringAsFixed(2)}'),
                   // 달러 가격
-                  Text('₩ ${item.priceKrw.toStringAsFixed(0)}'),
+                  Text('₩ ${item.profilePrice.toStringAsFixed(0)}'),
                   // 원화 가격
                 ],
               ),
