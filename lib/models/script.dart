@@ -1,7 +1,7 @@
-class ScriptModel {
+class Script {
   final String profileScript, destinationScript;
 
-  ScriptModel.fromJson(Map<String, dynamic> json)
+  Script.fromJson(Map<String, dynamic> json)
       : profileScript = json['profileScript'],
         destinationScript = json['destinationScript'];
 }
