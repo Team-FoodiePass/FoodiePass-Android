@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/food_detail_page.dart';
 import 'package:foodiepass_android/pages/order_list_page.dart';
+import 'package:foodiepass_android/models/food.dart'; // food.dart 파일을 import
 
 class MenuSelectPage extends StatelessWidget {
   @override
@@ -51,8 +52,7 @@ class MenuSelectPage extends StatelessWidget {
                 mainAxisSpacing: 8, // 항목 사이의 세로 간격
                 childAspectRatio: 0.75, // 항목의 가로 세로 비율
               ),
-              itemCount: menuItems.length,
-              // 메뉴 아이템의 개수
+              itemCount: menuItems.length, // food.dart에서 불러온 메뉴 아이템 개수
               itemBuilder: (context, index) {
                 return MenuItemCard(item: menuItems[index]); // 개별 메뉴 아이템 카드 생성
               },
@@ -102,7 +102,7 @@ class MenuSelectPage extends StatelessWidget {
 
 // 개별 메뉴 아이템을 표시하는 카드 위젯
 class MenuItemCard extends StatelessWidget {
-  final MenuItem item;
+  final MenuItem item; // MenuItem 객체
 
   const MenuItemCard({required this.item});
 
@@ -112,21 +112,11 @@ class MenuItemCard extends StatelessWidget {
       color: Colors.white, // 카드 배경 흰색
       child: InkWell(
         onTap: () {
-          // 메뉴 아이템 클릭 시 FoodDetailPage로 이동
+          // 메뉴 아이템 클릭 시 FoodDetailPage로 이동하면서 해당 MenuItem 객체를 전달
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => FoodDetailPage(
-                foodName: item.name,
-                // 영어 메뉴 이름
-                koreanName: item.koreanName,
-                // 한글 메뉴 이름
-                foodImage: item.imagePath,
-                // 메뉴 이미지 경로
-                priceUsd: item.priceUsd,
-                // 달러 가격
-                priceKrw: item.priceKrw, // 원화 가격
-              ),
+              builder: (context) => FoodDetailPage(item: item), // MenuItem 전달
             ),
           );
         },
@@ -138,7 +128,7 @@ class MenuItemCard extends StatelessWidget {
               child: Container(
                 color: Colors.white, // 이미지 배경 흰색
                 child: Image.asset(
-                  item.imagePath, // 이미지 경로
+                  item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png', // 이미지 경로
                   fit: BoxFit.cover, // 이미지를 꽉 채워 표시
                 ),
               ),
@@ -169,66 +159,3 @@ class MenuItemCard extends StatelessWidget {
     );
   }
 }
-
-// 메뉴 아이템 정보 클래스
-class MenuItem {
-  final String name; // 메뉴 이름 (영어)
-  final String koreanName; // 메뉴 이름 (한글)
-  final String imagePath; // 이미지 파일 경로
-  final double priceUsd; // 달러 가격
-  final double priceKrw; // 원화 가격
-
-  MenuItem({
-    required this.name,
-    required this.koreanName,
-    required this.imagePath,
-    required this.priceUsd,
-    required this.priceKrw,
-  });
-}
-
-// 메뉴 아이템 목록 정의
-final List<MenuItem> menuItems = [
-  MenuItem(
-    name: 'Kimchi',
-    koreanName: '김치',
-    imagePath: 'assets/images/food_menu/kimchi.png',
-    priceUsd: 3.73,
-    priceKrw: 5000,
-  ),
-  MenuItem(
-    name: 'Bibimbap',
-    koreanName: '비빔밥',
-    imagePath: 'assets/images/food_menu/bibimbap.png',
-    priceUsd: 7.47,
-    priceKrw: 10000,
-  ),
-  MenuItem(
-    name: 'Bulgogi',
-    koreanName: '불고기',
-    imagePath: 'assets/images/food_menu/bulgogi.png',
-    priceUsd: 14.94,
-    priceKrw: 20000,
-  ),
-  MenuItem(
-    name: 'Tteokbokki',
-    koreanName: '떡볶이',
-    imagePath: 'assets/images/food_menu/tteokbokki.png',
-    priceUsd: 37.34,
-    priceKrw: 50000,
-  ),
-  MenuItem(
-    name: 'Galbi',
-    koreanName: '갈비',
-    imagePath: 'assets/images/food_menu/galbi.png',
-    priceUsd: 74.68,
-    priceKrw: 100000,
-  ),
-  MenuItem(
-    name: 'Japchae',
-    koreanName: '잡채',
-    imagePath: 'assets/images/food_menu/japchae.png',
-    priceUsd: 112.02,
-    priceKrw: 150000,
-  ),
-];

@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/order_list_page.dart';
+import 'package:foodiepass_android/models/food.dart'; // food.dart에서 불러옴
 
 class FoodDetailPage extends StatefulWidget {
-  final String foodName; // 음식 이름
-  final String koreanName; // 한글 음식 이름
-  final String foodImage; // 음식 이미지 경로
-  final double priceUsd; // 달러 가격
-  final double priceKrw; // 원화 가격
+  final MenuItem item; // MenuItem 객체
 
-  // 음식 정보 받기
-  FoodDetailPage({
-    required this.foodName,
-    required this.koreanName,
-    required this.foodImage,
-    required this.priceUsd,
-    required this.priceKrw,
-  });
+  // 생성자
+  FoodDetailPage({required this.item});
 
   @override
   _FoodDetailPageState createState() => _FoodDetailPageState();
@@ -24,37 +15,16 @@ class FoodDetailPage extends StatefulWidget {
 class _FoodDetailPageState extends State<FoodDetailPage> {
   int quantity = 1; // 수량 초기값 설정
 
-  // 특정 음식 이름에 따라 설명을 생성
-  String _getFoodDescription(String foodName) {
-    switch (foodName) {
-      case 'Kimchi':
-        return '김치는 한국 전통 발효 음식으로, 고추, 마늘, 생강, 파 등 다양한 재료와 함께 배추나 무를 절여 만든 요리입니다.';
-      case 'Bibimbap':
-        return '비빔밥은 여러 가지 나물, 고기, 계란, 고추장과 함께 비벼 먹는 한국 전통 음식입니다.';
-      case 'Bulgogi':
-        return '불고기는 한국의 대표적인 고기 요리로, 얇게 저민 고기를 양념하여 구운 요리입니다.';
-      case 'Tteokbokki':
-        return '떡볶이는 쌀떡과 고추장 소스로 만든 매콤한 한국의 길거리 음식으로, 주로 어묵, 양배추, 양파와 함께 볶아 먹습니다.';
-      case 'Galbi':
-        return '갈비는 소고기나 돼지고기의 갈비뼈를 양념에 재운 후 구워 먹는 한국의 전통 요리입니다. 달콤하면서도 짭짤한 양념이 특징입니다.';
-      case 'Japchae':
-        return '잡채는 당면과 다양한 채소, 고기를 간장과 설탕으로 볶아 만든 한국의 대표적인 반찬 중 하나입니다.';
-      default:
-        return '이 음식은 맛있는 한국 요리입니다. 자세한 정보는 나중에 제공될 예정입니다.';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    String description = _getFoodDescription(widget.foodName); // 음식 설명 가져오기
-    double totalPriceUsd = widget.priceUsd * quantity; // 수량에 따른 달러 총 가격
-    double totalPriceKrw = widget.priceKrw * quantity; // 수량에 따른 원화 총 가격
+    double totalPriceUsd = widget.item.priceUsd * quantity; // 수량에 따른 달러 총 가격
+    double totalPriceKrw = widget.item.priceKrw * quantity; // 수량에 따른 원화 총 가격
 
     return Scaffold(
       backgroundColor: Colors.white, // 페이지 전체 배경 흰색
       appBar: AppBar(
         title: Text(
-          widget.foodName,
+          widget.item.name,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -67,13 +37,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
         toolbarHeight: 80,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, size: 30, color: Colors.black),
-          // 검정색 뒤로가기 버튼
           onPressed: () => Navigator.pop(context), // 뒤로가기 버튼
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.shopping_cart, size: 30, color: Colors.black),
-            // 검정색 장바구니 버튼
             onPressed: () {
               Navigator.push(
                 context,
@@ -88,20 +56,24 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 음식 이미지 표시
-            Image.asset(widget.foodImage,
-                width: double.infinity, height: 200, fit: BoxFit.cover),
+            // 음식 이미지 표시 (이미지가 없으면 기본 이미지 표시)
+            Image.asset(
+              widget.item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png', // null일 경우 기본 이미지 표시
+              width: double.infinity,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
 
             SizedBox(height: 20),
 
             // 음식 이름 및 한글 이름
             Text(
-              widget.foodName,
+              widget.item.name,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
             Text(
-              widget.koreanName,
+              widget.item.koreanName,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
 
@@ -109,7 +81,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
 
             // 음식 세부 설명
             Text(
-              description, // 동적으로 생성된 설명 텍스트
+              widget.item.description, // MenuItem 객체에서 설명을 불러옴
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
 
@@ -124,7 +96,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '\$ ${widget.priceUsd.toStringAsFixed(2)}',
+                  '\$ ${widget.item.priceUsd.toStringAsFixed(2)}',
                   style: TextStyle(fontSize: 18),
                 ),
               ],
@@ -138,7 +110,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '₩ ${widget.priceKrw.toStringAsFixed(0)}',
+                  '₩ ${widget.item.priceKrw.toStringAsFixed(0)}',
                   style: TextStyle(fontSize: 18),
                 ),
               ],
