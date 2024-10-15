@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/DestinationController.dart';
+
 class DestinationSettingPage extends StatefulWidget {
   const DestinationSettingPage({super.key});
 
@@ -9,6 +11,9 @@ class DestinationSettingPage extends StatefulWidget {
 }
 
 class _DestinationSettingPageState extends State<DestinationSettingPage> {
+  final DestinationController destinationController =
+      Get.put(DestinationController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +60,7 @@ class _DestinationSettingPageState extends State<DestinationSettingPage> {
                 "어디에서 새로운 미식을 즐기고 계신가요?\n 여행지를 선택하세요.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20, // 텍스트 크기
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -80,14 +85,18 @@ class _DestinationSettingPageState extends State<DestinationSettingPage> {
                     shape: RoundedRectangleBorder(
                         side: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(5))),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "선택한 언어",
-                      style: TextStyle(fontSize: 17),
+                    GetBuilder<DestinationController>(
+                      builder: (destinationController) => Text(
+                        '${destinationController.destinationLanguage}',
+                        style: const TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.grey,
                     )
@@ -115,14 +124,18 @@ class _DestinationSettingPageState extends State<DestinationSettingPage> {
                     shape: RoundedRectangleBorder(
                         side: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(5))),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "선택한 화폐",
-                      style: TextStyle(fontSize: 17),
+                    GetBuilder<DestinationController>(
+                      builder: (destinationController) => Text(
+                        '${destinationController.destinationCurrency}',
+                        style: const TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.grey,
                     )

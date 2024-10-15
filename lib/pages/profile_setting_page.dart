@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodiepass_android/controller/ProfileController.dart';
 import 'package:foodiepass_android/pages/home_page.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,9 @@ class ProfileSettingPage extends StatefulWidget {
 }
 
 class _ProfileSettingPageState extends State<ProfileSettingPage> {
+  final ProfileController profileController =
+  Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,14 +87,18 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
                     shape: RoundedRectangleBorder(
                         side: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(5))),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "선택한 언어",
-                      style: TextStyle(fontSize: 17),
+                    GetBuilder<ProfileController>(
+                      builder: (profileController) => Text(
+                        '${profileController.profileLanguage}',
+                        style: const TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.grey,
                     )
@@ -118,14 +126,18 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
                     shape: RoundedRectangleBorder(
                         side: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(5))),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "선택한 화폐",
-                      style: TextStyle(fontSize: 17),
+                    GetBuilder<ProfileController>(
+                      builder: (profileController) => Text(
+                        '${profileController.profileCurrency}',
+                        style: const TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.grey,
                     )
