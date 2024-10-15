@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../controller/DestinationController.dart';
@@ -11,8 +12,45 @@ class DestinationSettingPage extends StatefulWidget {
 }
 
 class _DestinationSettingPageState extends State<DestinationSettingPage> {
+  late String destinationLanguage;
+  late String destinationCurrency;
+
   final DestinationController destinationController =
       Get.put(DestinationController());
+  final FlutterSecureStorage flutterSecureStorage =
+      const FlutterSecureStorage();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // 여행지 언어와 화폐 초기화
+    destinationLanguage = destinationController.destinationLanguage;
+    destinationCurrency = destinationController.destinationCurrency;
+  }
+
+  void showLanguageList() {
+    // TODO: 언어 목록 보여주기
+    print('click language list button');
+  }
+
+  void showCurrencyList() {
+    // TODO: 화폐 목록 보여주기
+    print('click currency list button');
+  }
+
+  void _submitDestinationInfo(BuildContext context) async {
+    // 설정한 여행지 정보를 저장한 뒤에 뒤로 가기
+    await flutterSecureStorage.write(
+        key: 'destinationLanguage', value: destinationLanguage);
+    await flutterSecureStorage.write(
+        key: 'destinationCurrency', value: destinationCurrency);
+
+    destinationController.changeDestination(
+        destinationLanguage, destinationCurrency);
+
+    Get.back();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +95,7 @@ class _DestinationSettingPageState extends State<DestinationSettingPage> {
             const Align(
               alignment: Alignment.center,
               child: Text(
-                "어디에서 새로운 미식을 즐기고 계신가요?\n 여행지를 선택하세요.",
+                "어디에서 새로운 미식을 즐기고 계신가요?\n여행지를 선택하세요.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
@@ -159,7 +197,7 @@ class _DestinationSettingPageState extends State<DestinationSettingPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(5),
           onTap: () {
-            submitDestinationInfo();
+            _submitDestinationInfo(context);
           },
           child: Container(
             width: double.infinity,
@@ -182,22 +220,5 @@ class _DestinationSettingPageState extends State<DestinationSettingPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
-  }
-
-  void showLanguageList() {
-    // TODO: 언어 목록 보여주기
-    print('click language list button');
-  }
-
-  void showCurrencyList() {
-    // TODO: 화폐 목록 보여주기
-    print('click currency list button');
-  }
-
-  void submitDestinationInfo() {
-    // TODO: 설정한 여행지 정보를 저장한 뒤에 뒤로 가기
-    print("click submit destination info button");
-
-    Get.back();
   }
 }

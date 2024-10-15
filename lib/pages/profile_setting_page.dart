@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:foodiepass_android/controller/ProfileController.dart';
 import 'package:foodiepass_android/pages/home_page.dart';
 import 'package:get/get.dart';
@@ -13,8 +14,48 @@ class ProfileSettingPage extends StatefulWidget {
 }
 
 class _ProfileSettingPageState extends State<ProfileSettingPage> {
-  final ProfileController profileController =
-  Get.put(ProfileController());
+  late String profileLanguage;
+  late String profileCurrency;
+
+  final ProfileController profileController = Get.put(ProfileController());
+  final FlutterSecureStorage flutterSecureStorage =
+      const FlutterSecureStorage();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // 프로필 언어와 화폐 초기화
+    profileLanguage = profileController.profileLanguage;
+    profileCurrency = profileController.profileCurrency;
+  }
+
+  void showLanguageList() {
+    // TODO: 언어 목록 보여주기
+    print('click language list button');
+  }
+
+  void showCurrencyList() {
+    // TODO: 화폐 목록 보여주기
+    print('click currency list button');
+  }
+
+  void _submitProfileInfo(BuildContext context) async {
+    // 설정한 프로필 언어와 화폐 정보 저장
+    await flutterSecureStorage.write(
+        key: 'profileLanguage', value: profileLanguage);
+    await flutterSecureStorage.write(
+        key: 'profileCurrency', value: profileCurrency);
+
+    profileController.changeProfile(profileLanguage, profileCurrency);
+
+    // 조건에 따라 뒤로 가기 로직 작성
+    if (widget.fromHomePage) {
+      Get.back();
+    } else {
+      Get.to(() => const HomePage());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +100,7 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
             const Align(
               alignment: Alignment.center,
               child: Text(
-                "당신은 누구인가요?\n 당신에 대해 알려주세요.",
+                "당신은 누구인가요?\n당신에 대해 알려주세요.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20, // 텍스트 크기
@@ -161,7 +202,7 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(5),
           onTap: () {
-            submitProfileInfo();
+            _submitProfileInfo(context);
           },
           child: Container(
             width: double.infinity,
@@ -184,26 +225,5 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
-  }
-
-  void showLanguageList() {
-    // TODO: 언어 목록 보여주기
-    print('click language list button');
-  }
-
-  void showCurrencyList() {
-    // TODO: 화폐 목록 보여주기
-    print('click currency list button');
-  }
-
-  void submitProfileInfo() {
-    // TODO: 언어와 화폐 정보 저장
-    print("click submit profile info button");
-
-    if (widget.fromHomePage) {
-      Get.back();
-    } else {
-      Get.to(() => const HomePage());
-    }
   }
 }
