@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodiepass_android/pages/menu_select_page.dart';
 import 'package:foodiepass_android/pages/order_list_page.dart';
 import 'package:foodiepass_android/models/food.dart';
 
@@ -15,8 +16,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    double totalPriceUsd = widget.item.destinationPrice * widget.item.quantity; // 수량에 따른 달러 총 가격
-    double totalPriceKrw = widget.item.profilePrice * widget.item.quantity; // 수량에 따른 원화 총 가격
+    double destinationTotalPrice = widget.item.destinationPrice * widget.item.quantity; // 수량에 따른 달러 총 가격
+    double profileTotalPrice = widget.item.profilePrice * widget.item.quantity; // 수량에 따른 원화 총 가격
 
     return Scaffold(
       backgroundColor: Colors.white, // 페이지 전체 배경 흰색
@@ -165,11 +166,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '\$ ${totalPriceUsd.toStringAsFixed(2)} (USD)',
+                        '\$ ${destinationTotalPrice.toStringAsFixed(2)} (USD)',
                         style: TextStyle(fontSize: 16),
                       ),
                       Text(
-                        '₩ ${totalPriceKrw.toStringAsFixed(0)} (KRW)',
+                        '₩ ${profileTotalPrice.toStringAsFixed(0)} (KRW)',
                         style: TextStyle(fontSize: 16),
                       ),
                     ],
@@ -186,7 +187,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderListPage()),
+                      MaterialPageRoute(builder: (context) => MenuSelectPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

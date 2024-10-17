@@ -23,11 +23,11 @@ class _OrderListPageState extends State<OrderListPage> {
     foodItems = menuItems
         .where((item) => item.quantity > 0)
         .map((item) => {
-      'name': item.profileName,
-      'engName': item.destinationName,
+      'profileName': item.profileName,
+      'destinationName': item.destinationName,
       'image': item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png',
-      'priceKRW': item.profilePrice,
-      'priceUSD': item.destinationPrice,
+      'profilePrice': item.profilePrice,
+      'destinationPrice': item.destinationPrice,
       'quantity': item.quantity,
       'food': item, // Food 객체 참조 추가
     })
@@ -83,8 +83,8 @@ class _OrderListPageState extends State<OrderListPage> {
           itemCount: foodItems.length,
           itemBuilder: (context, index) {
             final item = foodItems[index];
-            final int totalKRW = item['priceKRW'] * item['quantity'];
-            final double totalUSD = item['priceUSD'] * item['quantity'];
+            final double profileTotalPrice = item['profilePrice'] * item['quantity'];
+            final double destinationTotalPrice = item['destinationPrice'] * item['quantity'];
 
             return Card(
               margin: EdgeInsets.symmetric(vertical: 10),
@@ -115,13 +115,13 @@ class _OrderListPageState extends State<OrderListPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            item['name'],
+                            item['profileName'],
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 5),
                           Text(
-                            '${krwFormat.format(totalKRW)}',
+                            '${krwFormat.format(profileTotalPrice)}',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
                         ],
@@ -131,13 +131,13 @@ class _OrderListPageState extends State<OrderListPage> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          item['engName'],
+                          item['destinationName'],
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: 5),
                         Text(
-                          '${usdFormat.format(totalUSD)}',
+                          '${usdFormat.format(destinationTotalPrice)}',
                           style: TextStyle(fontSize: 16, color: Colors.black),
                         ),
                       ],
@@ -188,7 +188,7 @@ class _OrderListPageState extends State<OrderListPage> {
             Container(
               padding: const EdgeInsets.all(5),
               child: Text(
-                '총 가격: ${krwFormat.format(totalPrice['totalKRW'])}\nTotal Price: ${usdFormat.format(totalPrice['totalUSD'])}',
+                '총 가격: ${krwFormat.format(totalPrice['profileTotalPrice'])}\nTotal Price: ${usdFormat.format(totalPrice['destinationTotalPrice'])}',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, color: Colors.black),
               ),
@@ -259,14 +259,14 @@ class _OrderListPageState extends State<OrderListPage> {
 
   // 총 가격 계산 함수
   Map<String, dynamic> getTotalPrice() {
-    num totalKRW = 0;
-    num totalUSD = 0.0;
+    num profileTotalPrice = 0;
+    num destinationTotalPrice = 0.0;
 
     for (var item in foodItems) {
-      totalKRW += item['priceKRW'] * item['quantity'];
-      totalUSD += item['priceUSD'] * item['quantity'];
+      profileTotalPrice += item['profilePrice'] * item['quantity'];
+      destinationTotalPrice += item['destinationPrice'] * item['quantity'];
     }
 
-    return {'totalKRW': totalKRW, 'totalUSD': totalUSD};
+    return {'profileTotalPrice': profileTotalPrice, 'destinationTotalPrice': destinationTotalPrice};
   }
 }
