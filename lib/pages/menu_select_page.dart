@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/food_detail_page.dart';
 import 'package:foodiepass_android/pages/order_list_page.dart';
-import 'package:foodiepass_android/models/food.dart'; // food.dart 파일을 import
+import 'package:foodiepass_android/models/food.dart';
 
 class MenuSelectPage extends StatelessWidget {
   @override
@@ -52,7 +52,7 @@ class MenuSelectPage extends StatelessWidget {
                 mainAxisSpacing: 8, // 항목 사이의 세로 간격
                 childAspectRatio: 0.75, // 항목의 가로 세로 비율
               ),
-              itemCount: menuItems.length, // food.dart에서 불러온 메뉴 아이템 개수
+              itemCount: menuItems.length,
               itemBuilder: (context, index) {
                 return MenuItemCard(item: menuItems[index]); // 개별 메뉴 아이템 카드 생성
               },
@@ -112,7 +112,6 @@ class MenuItemCard extends StatelessWidget {
       color: Colors.white, // 카드 배경 흰색
       child: InkWell(
         onTap: () {
-          // 메뉴 아이템 클릭 시 FoodDetailPage로 이동하면서 해당 MenuItem 객체를 전달
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -128,8 +127,8 @@ class MenuItemCard extends StatelessWidget {
               child: Container(
                 color: Colors.white, // 이미지 배경 흰색
                 child: Image.asset(
-                  item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png', // 이미지 경로
-                  fit: BoxFit.cover, // 이미지를 꽉 채워 표시
+                  item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png',
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

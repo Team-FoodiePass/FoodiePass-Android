@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:foodiepass_android/models/food.dart';
 import 'home_page.dart';
 
 class OrderScriptPage extends StatefulWidget {
@@ -11,12 +11,36 @@ class OrderScriptPage extends StatefulWidget {
 }
 
 class _OrderScriptPageState extends State<OrderScriptPage> {
-
   @override
   Widget build(BuildContext context) {
     const double appBarHeight = 60.0;
     final double screenHeight = MediaQuery.of(context).size.height;
     final double bodyHeight = screenHeight - appBarHeight;
+
+    // food.dart의 quantity가 1 이상인 음식들 필터링
+    final List<Food> orderedItems = menuItems.where((item) => item.quantity > 0).toList();
+
+    // 여행지 주문 메시지 생성
+    String destinationOrderMessage = "hello, I want to order.\n";
+    for (int i = 0; i < orderedItems.length; i++) {
+      final item = orderedItems[i];
+      destinationOrderMessage += "${item.quantity} ${item.destinationName}";
+      if (i < orderedItems.length - 1) {
+        destinationOrderMessage += "\n";
+      }
+    }
+    destinationOrderMessage += " please";
+
+    // 이용자 주문 메시지 생성
+    String profileOrderMessage = "주문하고 싶습니다.\n";
+    for (int i = 0; i < orderedItems.length; i++) {
+      final item = orderedItems[i];
+      profileOrderMessage += "${item.profileName} ${item.quantity}개";
+      if (i < orderedItems.length - 1) {
+        profileOrderMessage += "\n";
+      }
+    }
+    profileOrderMessage += " 주세요";
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -57,16 +81,16 @@ class _OrderScriptPageState extends State<OrderScriptPage> {
             Expanded(
               child: Container(
                 alignment: Alignment.bottomRight,
-                padding: const EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Transform.rotate(
                       angle: 3.14159,
-                      child: const Text(
-                        "hello, I want to order",
-                        style: TextStyle(fontSize: 24),
+                      child: Text(
+                        destinationOrderMessage,
+                        style: const TextStyle(fontSize: 24),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -99,22 +123,22 @@ class _OrderScriptPageState extends State<OrderScriptPage> {
               child: Container(
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.only(left: 20),
-                child: const Column(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       '당신의 주문',
                       style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
-                      "주문하고 싶습니다.",
-                      style: TextStyle(fontSize: 24),
+                      profileOrderMessage,
+                      style: const TextStyle(fontSize: 24),
                     ),
                   ],
                 ),
@@ -164,19 +188,16 @@ class _OrderScriptPageState extends State<OrderScriptPage> {
 
   void clickBackButton() {
     // TODO: Get.back()
-    print("click go back button");
     Navigator.pop(context);
   }
 
   void clickHomeButton() {
     // TODO: Go main
-    print("click go home button");
     Get.to(() => const HomePage());
   }
 
   void finishOrder() {
     // TODO: Go main
-    print("click finish button");
     Get.to(() => const HomePage());
   }
 }

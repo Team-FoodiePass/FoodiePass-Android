@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/order_script_page.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:foodiepass_android/models/food.dart';
 
 class OrderListPage extends StatefulWidget {
   const OrderListPage({
@@ -13,63 +14,31 @@ class OrderListPage extends StatefulWidget {
 }
 
 class _OrderListPageState extends State<OrderListPage> {
-  // 임시 데이터: 음식 목록
-  final List<Map<String, dynamic>> foodItems = [
-    {
-      'name': '김치',
-      'image': '/assets/images/food_menu/kimchi.png', // 임시 이미지 URL
-      'priceKRW': 5500,
-      'priceUSD': 3.73,
-      'quantity': 1,
-      'engName': 'Kimchi'
-    },
-    {
-      'name': '비빔밥',
-      'image': '/assets/images/food_menu/bibimbap.png', // 임시 이미지 URL
-      'priceKRW': 10000,
-      'priceUSD': 7.47,
-      'quantity': 1,
-      'engName': 'Bibimbap'
-    },
-    {
-      'name': '불고기',
-      'image': '/assets/images/food_menu/bulgogi.png', // 임시 이미지 URL
-      'priceKRW': 20000,
-      'priceUSD': 14.94,
-      'quantity': 1,
-      'engName': 'Bulgogi'
-    },
-    {
-      'name': '떡볶이',
-      'image': '/assets/images/food_menu/tteokbokki.png', // 임시 이미지 URL
-      'priceKRW': 50000,
-      'priceUSD': 37.34,
-      'quantity': 1,
-      'engName': 'Tteokbokki'
-    },
-    {
-      'name': '갈비',
-      'image': '/assets/images/food_menu/galbi.png', // 임시 이미지 URL
-      'priceKRW': 100000,
-      'priceUSD': 74.68,
-      'quantity': 1,
-      'engName': 'Galbi'
-    },
-    {
-      'name': '잡채',
-      'image': '/assets/images/food_menu/japchae.png', // 임시 이미지 URL
-      'priceKRW': 150000,
-      'priceUSD': 112.02,
-      'quantity': 1,
-      'engName': 'Japchae'
-    },
-  ];
+  List<Map<String, dynamic>> foodItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // foodItems 초기화
+    foodItems = menuItems
+        .where((item) => item.quantity > 0)
+        .map((item) => {
+      'name': item.profileName,
+      'engName': item.destinationName,
+      'image': item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png',
+      'priceKRW': item.profilePrice,
+      'priceUSD': item.destinationPrice,
+      'quantity': item.quantity,
+      'food': item, // Food 객체 참조 추가
+    })
+        .toList();
+  }
 
   // NumberFormat을 사용하여 통화 형식 지정
   final NumberFormat krwFormat =
-      NumberFormat.currency(locale: 'ko_KR', symbol: '₩');
+  NumberFormat.currency(locale: 'ko_KR', symbol: '₩');
   final NumberFormat usdFormat =
-      NumberFormat.currency(locale: 'en_US', symbol: '\$');
+  NumberFormat.currency(locale: 'en_US', symbol: '\$');
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +105,7 @@ class _OrderListPageState extends State<OrderListPage> {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.grey[200],
                         image: DecorationImage(
-                          image: NetworkImage(item['image']),
+                          image: AssetImage(item['image']),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -246,7 +215,7 @@ class _OrderListPageState extends State<OrderListPage> {
                   ),
                   child: const Center(
                     child: Text(
-                      "주문 완료하기",
+                      "Finish Order",
                       style: TextStyle(
                         color: Colors.white, // 텍스트 색상 설정
                       ),
@@ -280,8 +249,10 @@ class _OrderListPageState extends State<OrderListPage> {
   }
 
   void deleteItem(int index) {
-    // TODO: 음식 삭제
     setState(() {
+      // Food 객체의 quantity를 0으로 설정
+      Food food = foodItems[index]['food'];
+      food.quantity = 0;
       foodItems.removeAt(index);
     });
   }
