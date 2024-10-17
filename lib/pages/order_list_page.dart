@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/order_script_page.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:foodiepass_android/models/food.dart';
 
 class OrderListPage extends StatefulWidget {
   const OrderListPage({
@@ -13,63 +14,31 @@ class OrderListPage extends StatefulWidget {
 }
 
 class _OrderListPageState extends State<OrderListPage> {
-  // 임시 데이터: 음식 목록
-  final List<Map<String, dynamic>> foodItems = [
-    {
-      'name': '김치',
-      'image': '/assets/images/food_menu/kimchi.png', // 임시 이미지 URL
-      'priceKRW': 5500,
-      'priceUSD': 3.73,
-      'quantity': 1,
-      'engName': 'Kimchi'
-    },
-    {
-      'name': '비빔밥',
-      'image': '/assets/images/food_menu/bibimbap.png', // 임시 이미지 URL
-      'priceKRW': 10000,
-      'priceUSD': 7.47,
-      'quantity': 1,
-      'engName': 'Bibimbap'
-    },
-    {
-      'name': '불고기',
-      'image': '/assets/images/food_menu/bulgogi.png', // 임시 이미지 URL
-      'priceKRW': 20000,
-      'priceUSD': 14.94,
-      'quantity': 1,
-      'engName': 'Bulgogi'
-    },
-    {
-      'name': '떡볶이',
-      'image': '/assets/images/food_menu/tteokbokki.png', // 임시 이미지 URL
-      'priceKRW': 50000,
-      'priceUSD': 37.34,
-      'quantity': 1,
-      'engName': 'Tteokbokki'
-    },
-    {
-      'name': '갈비',
-      'image': '/assets/images/food_menu/galbi.png', // 임시 이미지 URL
-      'priceKRW': 100000,
-      'priceUSD': 74.68,
-      'quantity': 1,
-      'engName': 'Galbi'
-    },
-    {
-      'name': '잡채',
-      'image': '/assets/images/food_menu/japchae.png', // 임시 이미지 URL
-      'priceKRW': 150000,
-      'priceUSD': 112.02,
-      'quantity': 1,
-      'engName': 'Japchae'
-    },
-  ];
+  List<Map<String, dynamic>> foodItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // foodItems 초기화
+    foodItems = menuItems
+        .where((item) => item.quantity > 0)
+        .map((item) => {
+      'profileName': item.profileName,
+      'destinationName': item.destinationName,
+      'image': item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png',
+      'profilePrice': item.profilePrice,
+      'destinationPrice': item.destinationPrice,
+      'quantity': item.quantity,
+      'food': item, // Food 객체 참조 추가
+    })
+        .toList();
+  }
 
   // NumberFormat을 사용하여 통화 형식 지정
   final NumberFormat krwFormat =
-      NumberFormat.currency(locale: 'ko_KR', symbol: '₩');
+  NumberFormat.currency(locale: 'ko_KR', symbol: '₩');
   final NumberFormat usdFormat =
-      NumberFormat.currency(locale: 'en_US', symbol: '\$');
+  NumberFormat.currency(locale: 'en_US', symbol: '\$');
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +83,8 @@ class _OrderListPageState extends State<OrderListPage> {
           itemCount: foodItems.length,
           itemBuilder: (context, index) {
             final item = foodItems[index];
-            final int totalKRW = item['priceKRW'] * item['quantity'];
-            final double totalUSD = item['priceUSD'] * item['quantity'];
+            final double profileTotalPrice = item['profilePrice'] * item['quantity'];
+            final double destinationTotalPrice = item['destinationPrice'] * item['quantity'];
 
             return Card(
               margin: EdgeInsets.symmetric(vertical: 10),
@@ -136,7 +105,7 @@ class _OrderListPageState extends State<OrderListPage> {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.grey[200],
                         image: DecorationImage(
-                          image: NetworkImage(item['image']),
+                          image: AssetImage(item['image']),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -146,13 +115,13 @@ class _OrderListPageState extends State<OrderListPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            item['name'],
+                            item['profileName'],
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 5),
                           Text(
-                            '${krwFormat.format(totalKRW)}',
+                            '${krwFormat.format(profileTotalPrice)}',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
                         ],
@@ -162,13 +131,13 @@ class _OrderListPageState extends State<OrderListPage> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          item['engName'],
+                          item['destinationName'],
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: 5),
                         Text(
-                          '${usdFormat.format(totalUSD)}',
+                          '${usdFormat.format(destinationTotalPrice)}',
                           style: TextStyle(fontSize: 16, color: Colors.black),
                         ),
                       ],
@@ -219,7 +188,7 @@ class _OrderListPageState extends State<OrderListPage> {
             Container(
               padding: const EdgeInsets.all(5),
               child: Text(
-                '총 가격: ${krwFormat.format(totalPrice['totalKRW'])}\nTotal Price: ${usdFormat.format(totalPrice['totalUSD'])}',
+                '총 가격: ${krwFormat.format(totalPrice['profileTotalPrice'])}\nTotal Price: ${usdFormat.format(totalPrice['destinationTotalPrice'])}',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, color: Colors.black),
               ),
@@ -246,7 +215,7 @@ class _OrderListPageState extends State<OrderListPage> {
                   ),
                   child: const Center(
                     child: Text(
-                      "주문 완료하기",
+                      "Finish Order",
                       style: TextStyle(
                         color: Colors.white, // 텍스트 색상 설정
                       ),
@@ -280,22 +249,24 @@ class _OrderListPageState extends State<OrderListPage> {
   }
 
   void deleteItem(int index) {
-    // TODO: 음식 삭제
     setState(() {
+      // Food 객체의 quantity를 0으로 설정
+      Food food = foodItems[index]['food'];
+      food.quantity = 0;
       foodItems.removeAt(index);
     });
   }
 
   // 총 가격 계산 함수
   Map<String, dynamic> getTotalPrice() {
-    num totalKRW = 0;
-    num totalUSD = 0.0;
+    num profileTotalPrice = 0;
+    num destinationTotalPrice = 0.0;
 
     for (var item in foodItems) {
-      totalKRW += item['priceKRW'] * item['quantity'];
-      totalUSD += item['priceUSD'] * item['quantity'];
+      profileTotalPrice += item['profilePrice'] * item['quantity'];
+      destinationTotalPrice += item['destinationPrice'] * item['quantity'];
     }
 
-    return {'totalKRW': totalKRW, 'totalUSD': totalUSD};
+    return {'profileTotalPrice': profileTotalPrice, 'destinationTotalPrice': destinationTotalPrice};
   }
 }
