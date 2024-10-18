@@ -130,10 +130,12 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         });
                       },
                     ),
+                    SizedBox(width: 5,),
                     Text(
                       '${widget.item.quantity}',
                       style: TextStyle(fontSize: 18),
                     ),
+                    SizedBox(width: 5,),
                     IconButton(
                       icon: Icon(Icons.add_circle_outline),
                       onPressed: () {

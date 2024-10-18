@@ -168,21 +168,24 @@ class _OrderListPageState extends State<OrderListPage> {
                               deleteItem(index);
                             },
                             icon: const Icon(Icons.delete)),
+                        SizedBox(width: 15,),
                         IconButton(
                           onPressed: () {
                             decrementQuantity(index);
                           },
-                          icon: Icon(Icons.remove_circle_outline),
+                          icon: const Icon(Icons.remove_circle_outline),
                         ),
+                        SizedBox(width: 5,),
                         Text(
                           item['quantity'].toString(),
                           style: TextStyle(fontSize: 18),
                         ),
+                        SizedBox(width: 5,),
                         IconButton(
                           onPressed: () {
                             incrementQuantity(index);
                           },
-                          icon: Icon(Icons.add_circle_outline),
+                          icon: const Icon(Icons.add_circle_outline),
                         ),
                       ],
                     ),
