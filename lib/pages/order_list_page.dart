@@ -23,22 +23,23 @@ class _OrderListPageState extends State<OrderListPage> {
     foodItems = menuItems
         .where((item) => item.quantity > 0)
         .map((item) => {
-      'profileName': item.profileName,
-      'destinationName': item.destinationName,
-      'image': item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png',
-      'profilePrice': item.profilePrice,
-      'destinationPrice': item.destinationPrice,
-      'quantity': item.quantity,
-      'food': item, // Food 객체 참조 추가
-    })
+              'profileName': item.profileName,
+              'destinationName': item.destinationName,
+              'image':
+                  item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png',
+              'profilePrice': item.profilePrice,
+              'destinationPrice': item.destinationPrice,
+              'quantity': item.quantity,
+              'food': item, // Food 객체 참조 추가
+            })
         .toList();
   }
 
   // NumberFormat을 사용하여 통화 형식 지정
   final NumberFormat krwFormat =
-  NumberFormat.currency(locale: 'ko_KR', symbol: '₩');
+      NumberFormat.currency(locale: 'ko_KR', symbol: '₩');
   final NumberFormat usdFormat =
-  NumberFormat.currency(locale: 'en_US', symbol: '\$');
+      NumberFormat.currency(locale: 'en_US', symbol: '\$');
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,8 @@ class _OrderListPageState extends State<OrderListPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        toolbarHeight: 80, // 앱바 높이 설정
+        toolbarHeight: 80,
+        // 앱바 높이 설정
 
         leading: SizedBox(
           width: 100,
@@ -83,8 +85,10 @@ class _OrderListPageState extends State<OrderListPage> {
           itemCount: foodItems.length,
           itemBuilder: (context, index) {
             final item = foodItems[index];
-            final double profileTotalPrice = item['profilePrice'] * item['quantity'];
-            final double destinationTotalPrice = item['destinationPrice'] * item['quantity'];
+            final double profileTotalPrice =
+                item['profilePrice'] * item['quantity'];
+            final double destinationTotalPrice =
+                item['destinationPrice'] * item['quantity'];
 
             return Card(
               margin: EdgeInsets.symmetric(vertical: 10),
@@ -94,83 +98,95 @@ class _OrderListPageState extends State<OrderListPage> {
                   side: BorderSide(color: Colors.lightGreen, width: 2)),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Row(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 80,
-                      height: 80,
-                      margin: EdgeInsets.only(right: 15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[200],
-                        image: DecorationImage(
-                          image: AssetImage(item['image']),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item['profileName'],
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            '${krwFormat.format(profileTotalPrice)}',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                    Row(
                       children: [
-                        Text(
-                          item['destinationName'],
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                        Container(
+                          width: 80,
+                          height: 80,
+                          margin: EdgeInsets.only(right: 15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[200],
+                            image: DecorationImage(
+                              image: AssetImage(item['image']),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                        SizedBox(height: 5),
-                        Text(
-                          '${usdFormat.format(destinationTotalPrice)}',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item['profileName'],
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                '${krwFormat.format(profileTotalPrice)}',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                item['destinationName'],
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                overflow:
+                                    TextOverflow.ellipsis, // 줄내림 대신 ... 처리
+                                maxLines: 1, // 한 줄로 제한
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                '${usdFormat.format(destinationTotalPrice)}',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(width: 20),
-                    // 수량 조절 버튼
-                    Column(
+                    SizedBox(width: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                decrementQuantity(index);
-                              },
-                              icon: Icon(Icons.remove_circle_outline),
-                            ),
-                            Text(
-                              item['quantity'].toString(),
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                incrementQuantity(index);
-                              },
-                              icon: Icon(Icons.add_circle_outline),
-                            ),
-                          ],
-                        ),
                         IconButton(
                             onPressed: () {
                               deleteItem(index);
                             },
-                            icon: Icon(Icons.delete))
+                            icon: const Icon(Icons.delete)),
+                        SizedBox(width: 15,),
+                        IconButton(
+                          onPressed: () {
+                            decrementQuantity(index);
+                          },
+                          icon: const Icon(Icons.remove_circle_outline),
+                        ),
+                        SizedBox(width: 5,),
+                        Text(
+                          item['quantity'].toString(),
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(width: 5,),
+                        IconButton(
+                          onPressed: () {
+                            incrementQuantity(index);
+                          },
+                          icon: const Icon(Icons.add_circle_outline),
+                        ),
                       ],
                     ),
                   ],
@@ -267,6 +283,9 @@ class _OrderListPageState extends State<OrderListPage> {
       destinationTotalPrice += item['destinationPrice'] * item['quantity'];
     }
 
-    return {'profileTotalPrice': profileTotalPrice, 'destinationTotalPrice': destinationTotalPrice};
+    return {
+      'profileTotalPrice': profileTotalPrice,
+      'destinationTotalPrice': destinationTotalPrice
+    };
   }
 }
