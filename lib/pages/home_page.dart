@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        toolbarHeight: 100,
+        toolbarHeight: 80,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -155,6 +155,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   ]),
             ),
+            const SizedBox(height: 10),
             // 프로필, 여행지 설정 버튼
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -223,7 +224,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+
+            const Spacer(),
             // 하단 메시지
             const Text(
               'made by TEAM FoodiePass',
