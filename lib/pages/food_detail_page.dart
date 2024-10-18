@@ -13,11 +13,11 @@ class FoodDetailPage extends StatefulWidget {
 }
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
-
   @override
   Widget build(BuildContext context) {
-    double destinationTotalPrice = widget.item.destinationPrice * widget.item.quantity; // 수량에 따른 달러 총 가격
-    double profileTotalPrice = widget.item.profilePrice * widget.item.quantity; // 수량에 따른 원화 총 가격
+    double destinationTotalPrice =
+        widget.item.destinationPrice * widget.item.quantity;
+    double profileTotalPrice = widget.item.profilePrice * widget.item.quantity;
 
     return Scaffold(
       backgroundColor: Colors.white, // 페이지 전체 배경 흰색
@@ -36,7 +36,12 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
         toolbarHeight: 80,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, size: 30, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MenuSelectPage()),
+            );
+          },
         ),
         actions: [
           IconButton(
@@ -56,14 +61,13 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              widget.item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png',
+              widget.item.imagePath ??
+                  'assets/images/food_menu/ImageNotFound.png',
               width: double.infinity,
               height: 200,
               fit: BoxFit.cover,
             ),
-
             SizedBox(height: 20),
-
             Text(
               widget.item.destinationName,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -73,16 +77,12 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               widget.item.profileName,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-
             SizedBox(height: 20),
-
             Text(
               widget.item.description,
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
-
             SizedBox(height: 20),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -96,9 +96,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 ),
               ],
             ),
-
             SizedBox(height: 10),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -112,9 +110,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 ),
               ],
             ),
-
             SizedBox(height: 20),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -150,9 +146,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 ),
               ],
             ),
-
             Spacer(),
-
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Row(
@@ -166,11 +160,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '\$ ${destinationTotalPrice.toStringAsFixed(2)} (USD)',
+                        '\$ ${destinationTotalPrice.toStringAsFixed(2)}',
                         style: TextStyle(fontSize: 16),
                       ),
                       Text(
-                        '₩ ${profileTotalPrice.toStringAsFixed(0)} (KRW)',
+                        '₩ ${profileTotalPrice.toStringAsFixed(0)}',
                         style: TextStyle(fontSize: 16),
                       ),
                     ],
@@ -178,7 +172,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 ],
               ),
             ),
-
             Center(
               child: SizedBox(
                 width: double.infinity,

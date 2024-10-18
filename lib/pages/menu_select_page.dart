@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/food_detail_page.dart';
+import 'package:foodiepass_android/pages/home_page.dart';
 import 'package:foodiepass_android/pages/order_list_page.dart';
 import 'package:foodiepass_android/models/food.dart';
 
@@ -20,7 +21,10 @@ class MenuSelectPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, size: 30, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
           },
         ),
         actions: [
@@ -71,8 +75,7 @@ class MenuSelectPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => OrderListPage()),
+                      MaterialPageRoute(builder: (context) => OrderListPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
