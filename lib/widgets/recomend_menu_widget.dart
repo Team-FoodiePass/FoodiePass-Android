@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:foodiepass_android/pages/food_detail_page.dart';
+import 'package:foodiepass_android/pages/home_page.dart';
 import 'package:foodiepass_android/pages/order_list_page.dart';
 import 'package:foodiepass_android/models/food.dart';
 
-import 'package:foodiepass_android/test/test_menu_select_page_9.dart';
-
-class TestMenuSelectPage8 extends StatelessWidget {
+class RecomendMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Menu8',
+          'MenuFinal',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -73,7 +72,7 @@ class TestMenuSelectPage8 extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TestMenuSelectPage9()),
+                          builder: (context) => OrderListPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -107,25 +106,32 @@ class MenuItemCard extends StatelessWidget {
   const MenuItemCard({required this.item});
 
   bool isRecommended(Food item) {
-    return item.destinationName == 'Bibimbap' || item.destinationName == 'Bulgogi';
+    return item.destinationName == 'Bibimbap' ||
+        item.destinationName == 'Bulgogi';
   }
 
   @override
   Widget build(BuildContext context) {
     bool recommended = isRecommended(item);
 
-    return Stack(
-      children: [
-        InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FoodDetailPage(item: item),
-              ),
-            );
-          },
-          child: Card(
+    return Card(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+            color: recommended ? Colors.redAccent : Colors.transparent,
+            width: 2),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Stack(
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FoodDetailPage(item: item),
+                ),
+              );
+            },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -133,7 +139,8 @@ class MenuItemCard extends StatelessWidget {
                   child: Container(
                     color: Colors.white,
                     child: Image.asset(
-                      item.imagePath ?? 'assets/images/food_menu/ImageNotFound.png',
+                      item.imagePath ??
+                          'assets/images/food_menu/ImageNotFound.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -143,7 +150,13 @@ class MenuItemCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(item.destinationName, style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text(
+                        item.destinationName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: recommended ? Colors.blue : Colors.black,
+                        ),
+                      ),
                       SizedBox(height: 4),
                       Text(item.profileName),
                       SizedBox(height: 4),
@@ -155,24 +168,25 @@ class MenuItemCard extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        if (recommended)
-          Positioned(
-            top: 0,
-            left: 0,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.only(bottomRight: Radius.circular(8)),
-              ),
-              child: Text(
-                'Recommended',
-                style: TextStyle(color: Colors.white, fontSize: 12),
+          if (recommended)
+            Positioned(
+              top: 0,
+              left: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius:
+                  BorderRadius.only(bottomRight: Radius.circular(8)),
+                ),
+                child: Text(
+                  '추천 메뉴',
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
