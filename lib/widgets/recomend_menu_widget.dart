@@ -180,7 +180,7 @@ class MenuItemCard extends StatelessWidget {
                   BorderRadius.only(bottomRight: Radius.circular(8)),
                 ),
                 child: Text(
-                  '추천 메뉴',
+                  '한국인 선호 메뉴',
                   style: TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ),
