@@ -100,7 +100,7 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
             const Align(
               alignment: Alignment.center,
               child: Text(
-                "당신은 누구인가요?\n당신에 대해 알려주세요.",
+                "당신의 출신은 어디인가요?\n가장 익숙한 언어와 화폐를 선택하세요.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20, // 텍스트 크기
